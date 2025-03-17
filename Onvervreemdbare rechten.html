@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Rechten Formulier</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #2b2b2b;
+            color: #ffffff;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            text-align: center;
+            color: #ff4d4d;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            background-color: #3a3a3a;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        form {
+            background-color: #3a3a3a;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            font-size: 14px;
+            margin: 10px 0 5px;
+            color: #ffffff;
+        }
+        select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #4a4a4a;
+            color: #ffffff;
+            font-size: 14px;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff4d4d;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #e04343;
+        }
+    </style>
+</head>
+<body>
+    <h1>"Onvervreemdbare Rechten: Gegarandeerd door de Wet, Ontnomen door het Juridische"</h1>
+    <p>In Nederland gaan we ervan uit dat onze onvervreemdbare rechten – zoals het recht op leven, vrijheid van meningsuiting en gelijkheid – onaantastbaar zijn. De Grondwet en verdragen zoals het Europees Verdrag voor de Rechten van de Mens (EVRM) beloven dat niemand ze ons kan afnemen. We nemen vaak aan dat de wet ons beschermt en dat rechters altijd rechtvaardig oordelen. Maar hier komt de crux: "legal" is niet hetzelfde als "law". De wet (law) is de basis, zoals artikel 1 van de Grondwet dat discriminatie verbiedt. "Legal" is het juridische systeem, rechters, bureaucratie, procedures – dat bepaalt hoe die wetten volgens hun werken. En wat zien we in de praktijk? Wat een recht is, laten wij juridisch ons ontnemen: door aannames/presumpties en interpretaties en daardoor worden onze oorspronkelijke onvervreemdbare rechten verdraait. Onze rechten dienen te worden beschermd door de wet, maar worden ontnomen door een juridisch spel dat meer vragen oproept dan antwoorden geeft en daardoor meer het gevoel geeft van onrecht.</p>
+
+    <form id="rechtenForm" action="" method="POST">
+        <fieldset>
+            <legend>Informatie over Wetsartikel</legend>
+    
+            <div>
+                <label for="chatInput">1. Vul hier het wetsartikel in (bijvoorbeeld art. 72 WVW):</label>
+                <input type="text" id="chatInput" name="chatInput" required>
+            </div>
+    
+            <p>
+                <strong><u>Voorbeeld:</u></strong> art.28b Wahv betreft: Indien niet of niet volledig verhaal overeenkomstig de artikelen 26 en 27 heeft plaatsgevonden, kan Onze Minister het voertuig waarmee de gedraging heeft plaatsgevonden buiten gebruik stellen of, indien dit voertuig niet wordt aangetroffen, een soortgelijk voertuig waarover degene aan wie de administratieve sanctie is opgelegd, vermag te beschikken. Onze Minister kan tot uiterlijk vijf jaar nadat de opgelegde administratieve sanctie onherroepelijk is geworden van zijn bevoegdheid gebruik maken. Indien betaling in termijnen door Onze Minister is toegestaan, wordt de termijn waarin van de bevoegdheid gebruik kan worden gemaakt, verlengd met één jaar. De buitengebruikstelling duurt ten hoogste vier weken.
+            </p>
+    
+            <p>
+                <strong><u>Scenario:</u></strong> Stel, je leent een auto van een vriend, maar hebt zelf openstaande verkeersboetes. De politie houdt je aan en neemt de auto in beslag, met als reden jouw boetes. Artikel 28b Wahv geeft de minister de bevoegdheid om een voertuig waarover de overtreder (jij) beschikt buiten gebruik te stellen, zelfs als het niet jouw auto is. In een brief van het CJIB wordt de auto van de kentekenhouder definitief ingenomen en verkocht of vernietigd, met verwijzing naar artikel 28b Wahv.
+            </p>
+    
+            <div>
+                <label for="betrokkenheid">2. Ben je hier als een derden in de situatie of als direct betrokkenen?</label>
+                <select id="betrokkenheid" name="betrokkenheid" required>
+                    <option value="direct">Direct betrokken</option>
+                    <option value="indirect">Derden</option>
+                </select>
+            </div>
+    
+            <div>
+                <label for="email">3. Vul hier je e-mailadres in, als je het rapport later nog wil doornemen:</label>
+                <input type="email" id="email" name="email">
+            </div>
+    
+            <button type="submit">Verzenden</button>
+        </fieldset>
+    </form>
+
+    <script>
+        // Detecteer of we op localhost (de iMac) draaien
+        const hostname = window.location.hostname;
+        const webhookPath = "webhook-test/onvervreemdbaar";
+        let webhookUrl;
+
+        if (hostname === "localhost" || hostname === "127.0.0.1") {
+            // Als het formulier wordt geopend vanaf de iMac zelf
+            webhookUrl = `http://localhost:5678/${webhookPath}`;
+        } else {
+            // Voor externe apparaten (zoals Synology of mobiel)
+            webhookUrl = `http://192.168.178.213:5678/${webhookPath}`;
+        }
+
+        // Stel de action van het formulier dynamisch in
+        document.getElementById("rechtenForm").action = webhookUrl;
+    </script>
+</body>
+</html>
